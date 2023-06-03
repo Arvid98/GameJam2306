@@ -1222,9 +1222,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719141101754521418, guid: bdb632f2f31752e4aa7424916af374b3, type: 3}
+      propertyPath: fov
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719141101754521418, guid: bdb632f2f31752e4aa7424916af374b3, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 487671609}
+    - target: {fileID: 2719141101754521418, guid: bdb632f2f31752e4aa7424916af374b3, type: 3}
+      propertyPath: fovPrefab
+      value: 
+      objectReference: {fileID: 5775167233331644988, guid: 701291643719d4340a4bba6ef4a050d7, type: 3}
+    - target: {fileID: 2719141101754521418, guid: bdb632f2f31752e4aa7424916af374b3, type: 3}
+      propertyPath: viewDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2719141101754521418, guid: bdb632f2f31752e4aa7424916af374b3, type: 3}
       propertyPath: layerMask.m_Bits
       value: 384

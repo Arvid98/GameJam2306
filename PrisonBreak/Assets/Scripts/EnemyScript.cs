@@ -24,17 +24,22 @@ public class EnemyScript : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    private float viewDistance;
+
 
     //Variable for where the enemy should look
     private Vector3 lookAt;
-    private float fieldOfView;
 
     //Variables for patrol points
     [SerializeField] private List<GameObject> PatrolPointList = new List<GameObject>();
     private int currentPointIndex;
 
+    //Variables for FOV
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Transform fovPrefab;
+    [SerializeField] private float fov;
+    [SerializeField] private float viewDistance;
+    private FieldOfView fieldOfView;
+
 
 
     void Start()
@@ -46,7 +51,7 @@ public class EnemyScript : MonoBehaviour
 
         currentPointIndex = 0;
         currentSpeed = 3.5f;
-        viewDistance = 5f;
+
 
         if(PatrolPointList.Count != 0)
         {
@@ -54,7 +59,14 @@ public class EnemyScript : MonoBehaviour
         }
 
 
-        fieldOfView = 90f;
+        fov = 90f;
+        viewDistance = 5f;
+
+        fieldOfView = Instantiate(fovPrefab, null).GetComponent<FieldOfView>();
+        fieldOfView.SetFOV(fov);
+        fieldOfView.SetViewDistance(viewDistance);
+
+
     }
 
     // Update is called once per frame
@@ -125,8 +137,9 @@ public class EnemyScript : MonoBehaviour
                 break; 
         }
 
-        
-
+        //Update fov mesh
+        fieldOfView.SetAimDirection(direction);
+        fieldOfView.SetOrigin(transform.position);
     }
 
     //Called when the enemy should check if the target is inside their vision
@@ -140,7 +153,7 @@ public class EnemyScript : MonoBehaviour
             //Check if target is inside angle of the fov
             Vector2 directionToTarget = (target.transform.position - transform.position).normalized;
             var direction = lookAt - transform.position;
-            if (Vector3.Angle(direction, directionToTarget) < fieldOfView / 2f)
+            if (Vector3.Angle(direction, directionToTarget) < fov / 2f)
             {
                 Debug.Log("INSIDE ANGLE");
 
