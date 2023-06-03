@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
     BoxCollider2D collider;
     [SerializeField] AudioSource pickupSound;
     [SerializeField] AudioSource moveSound;
     [SerializeField] float normalSpeed = 5.0f;
     [SerializeField] float boostedSpeed = 10.0f;
+    [SerializeField] private GameObject visualGameObjectFront;
+    [SerializeField] private GameObject visualGameObjectBack;
+    [SerializeField] private GameObject visualGameObjectLeft;
+    [SerializeField] private GameObject visualGameObjectRight;
 
     private float currentSpeed; // Tracks the current speed
     private bool isSprinting; // Tracks if the player is sprinting
 
     [SerializeField] private bool hasKey;  // when the players pcik up one key turn true
     //GameObject doorObj;
-
+    [SerializeField] Sprite newSprite;
+    [SerializeField] Sprite sFront;
+    [SerializeField] Sprite sBack;
+    [SerializeField] Sprite sLeft;
+    [SerializeField] Sprite sRight;
+    void ChangeSprite()
+    {
+        spriteRenderer.sprite = newSprite;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,8 +40,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
+        ChangeSprite();
     }
-
+    void Visuals()
+    {
+        
+    }
    
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -53,9 +70,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-   
-   
-
     public void Movement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -98,5 +112,56 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSound.UnPause(); // Unpause the move sound if sprinting or moving
         }
+
+        if (moveHorizontal < 0)
+        {
+            newSprite = sRight;
+            transform.localScale = new Vector3(1,1,1);
+        }
+        else if (moveHorizontal > 0)
+        {
+            newSprite = sRight;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if(moveVertical <0)
+        {
+            newSprite = sFront;
+        }
+        else if (moveVertical > 0)
+        {
+            newSprite = sBack;
+        }
+    }
+    private void ShowFront()
+    {
+        visualGameObjectFront.SetActive(true);
+    }
+    private void HideFront()
+    {
+        visualGameObjectFront.SetActive(false);
+    }
+    private void ShowBack()
+    {
+        visualGameObjectBack.SetActive(true);
+    }
+    private void HideBack()
+    {
+        visualGameObjectBack.SetActive(false);
+    }
+    private void ShowRight()
+    {
+        visualGameObjectRight.SetActive(true);
+    }
+    private void HideRight()
+    {
+        visualGameObjectRight.SetActive(false);
+    }
+    private void ShowLeft()
+    {
+        visualGameObjectLeft.SetActive(true);
+    }
+    private void HideLeft()
+    {
+        visualGameObjectLeft.SetActive(false);
     }
 }
