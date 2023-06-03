@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    
+    [SerializeField] AudioSource audio;
     private enum State
     {
         Patrol,
@@ -49,6 +49,7 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
+        audio.mute = true;
         //Initializing agent variables necessary for the agent to work in 2D
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -178,7 +179,8 @@ public class EnemyScript : MonoBehaviour
                     if(raycastHit2D.collider.tag == "Player")
                     {
                         Debug.Log("SPOTTET!!!");
-
+                        audio.mute = false;
+                        audio.Play();
                         //Player spottet!
                         currentSpeed = chaseSpeed;
 
