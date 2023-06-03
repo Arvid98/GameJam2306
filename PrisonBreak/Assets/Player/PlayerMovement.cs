@@ -51,12 +51,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-               
+                hasKey = true;
+                pickupSound.mute = false;
+                pickupSound.Play();
+                Destroy(collision.gameObject);
             }
-            hasKey = true;
-            pickupSound.mute = false;
-            pickupSound.Play();
-            Destroy(collision.gameObject);
+           
         }
         if (collision.CompareTag("Hammer"))
         {
