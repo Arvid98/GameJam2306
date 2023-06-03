@@ -59,10 +59,8 @@ public class EnemyScript : MonoBehaviour
         chaseDistance = 20f;
 
 
-
-
         fov = 90f;
-        viewDistance = 5f;
+        viewDistance = 10f;
 
         fieldOfView = Instantiate(fovPrefab, null).GetComponent<FieldOfView>();
         fieldOfView.SetFOV(fov);
@@ -181,6 +179,8 @@ public class EnemyScript : MonoBehaviour
                         Debug.Log("SPOTTET!!!");
 
                         //Player spottet!
+
+
                         //Change state and execute code for when player is spottet.
 
                         currentState = State.ChasePlayer;
