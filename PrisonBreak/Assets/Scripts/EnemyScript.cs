@@ -30,9 +30,11 @@ public class EnemyScript : MonoBehaviour
     private Vector3 lookAt;
     private float fieldOfView;
 
-    //
+    //Variables for patrol points
     [SerializeField] private List<GameObject> PatrolPointList = new List<GameObject>();
     private int currentPointIndex;
+
+    [SerializeField] private LayerMask layerMask;
 
 
     void Start()
@@ -44,9 +46,14 @@ public class EnemyScript : MonoBehaviour
 
         currentPointIndex = 0;
         currentSpeed = 3.5f;
-        viewDistance = 15f;
+        viewDistance = 5f;
 
-        lookAt = PatrolPointList[currentPointIndex].transform.position;
+        if(PatrolPointList.Count != 0)
+        {
+            lookAt = PatrolPointList[currentPointIndex].transform.position;
+        }
+
+
         fieldOfView = 90f;
     }
 
@@ -79,22 +86,31 @@ public class EnemyScript : MonoBehaviour
             case State.Patrol:
                 //All behavir for the AI to do while patrolling
 
+                Debug.Log(PatrolPointList.Count);
+
                 //Move to the current patrol point, and change to the next in the list when reached
-                agent.destination = PatrolPointList[currentPointIndex].transform.position;
-                if (Vector2.Distance(transform.position, PatrolPointList[currentPointIndex].transform.position) < 0.5)
+                if(PatrolPointList.Count !=0)
                 {
-                    if(currentPointIndex >= PatrolPointList.Count-1)
+                    agent.destination = PatrolPointList[currentPointIndex].transform.position;
+                    if (Vector2.Distance(transform.position, PatrolPointList[currentPointIndex].transform.position) < 0.5)
                     {
-                        currentPointIndex = 0;
-                    }
-                    else
-                    {
-                        currentPointIndex++;
+                        if (currentPointIndex >= PatrolPointList.Count - 1)
+                        {
+                            currentPointIndex = 0;
+                        }
+                        else
+                        {
+                            currentPointIndex++;
+                        }
+
+                        //Make the enemy look towards next point
+                        lookAt = PatrolPointList[currentPointIndex].transform.position;
                     }
 
-                    //Make the enemy look towards next point
-                    lookAt = PatrolPointList[currentPointIndex].transform.position;
+
                 }
+
+                CheckForTarget();
 
                 //If player spotted switch to chase
 
@@ -119,12 +135,30 @@ public class EnemyScript : MonoBehaviour
         //Check if target is inside view distance of the enemy
         if(Vector2.Distance(transform.position, target.transform.position) <= viewDistance)
         {
+            Debug.Log("INSIDE VIEW DISTANCE");
+
             //Check if target is inside angle of the fov
             Vector2 directionToTarget = (target.transform.position - transform.position).normalized;
             var direction = lookAt - transform.position;
             if (Vector3.Angle(direction, directionToTarget) < fieldOfView / 2f)
             {
                 Debug.Log("INSIDE ANGLE");
+
+                //Shoot out raycast to hit target and walls.
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, directionToTarget, viewDistance, layerMask);
+                if(raycastHit2D.collider != null)
+                {
+                    Debug.Log(raycastHit2D.collider.tag);
+                    
+                    //If the object seen is the target, then switch state, if not, then it is a wall
+                    if(raycastHit2D.collider.tag == "Player")
+                    {
+                        //Player spottet!
+
+                        //Change state
+                        Debug.Log("SPOTTET!!!");
+                    }
+                }
             }
                 
         }
