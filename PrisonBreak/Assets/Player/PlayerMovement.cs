@@ -49,10 +49,11 @@ public class PlayerMovement : MonoBehaviour
    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Pickable"))
+        if (collision.CompareTag("Key"))
         {
             if (Input.GetKey(KeyCode.E))
             {
+                hasKey = true;
                 pickupSound.mute = false;
                 pickupSound.Play();
                 Destroy(collision.gameObject);
@@ -66,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
                 collision.gameObject.GetComponent<Door>().ToggleDoor();
                 hasKey = false;
+                pickupSound.Play();
                 //GameObject.FindWithTag("Door").GetComponent<Door>().open;
             }
         }

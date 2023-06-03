@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7526912362488888988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   pickupSound: {fileID: 1458945761119919884}
   moveSound: {fileID: 5758987899712622962}
   normalSpeed: 5
-  boostedSpeed: 10
+  boostedSpeed: 7
   visualGameObjectFront: {fileID: 0}
   visualGameObjectBack: {fileID: 0}
   visualGameObjectLeft: {fileID: 0}
