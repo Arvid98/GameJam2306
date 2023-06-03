@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,6 +28,7 @@ public class EnemyScript : MonoBehaviour
 
     //Variable for where the enemy should look
     private Vector3 lookAt;
+    private float fieldOfView;
 
     //
     [SerializeField] private List<GameObject> PatrolPointList = new List<GameObject>();
@@ -45,6 +47,7 @@ public class EnemyScript : MonoBehaviour
         viewDistance = 15f;
 
         lookAt = PatrolPointList[currentPointIndex].transform.position;
+        fieldOfView = 90f;
     }
 
     // Update is called once per frame
@@ -113,11 +116,17 @@ public class EnemyScript : MonoBehaviour
     //Called when the enemy should check if the target is inside their vision
     private void CheckForTarget()
     {
-        //Check if target if inside view distance of the enemy
+        //Check if target is inside view distance of the enemy
         if(Vector2.Distance(transform.position, target.transform.position) <= viewDistance)
         {
+            //Check if target is inside angle of the fov
             Vector2 directionToTarget = (target.transform.position - transform.position).normalized;
             var direction = lookAt - transform.position;
+            if (Vector3.Angle(direction, directionToTarget) < fieldOfView / 2f)
+            {
+                Debug.Log("INSIDE ANGLE");
+            }
+                
         }
     }
 }
