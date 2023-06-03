@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bana1.unity
     guid: 9f496bbddecd70e41853862ed6ef64e0
+  - enabled: 1
+    path: Assets/Scenes/Bana2.unity
+    guid: 49ab2e5959bfadf4cb4b436c6b83153d
   m_configObjects: {}
