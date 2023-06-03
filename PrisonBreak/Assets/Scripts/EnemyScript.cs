@@ -23,6 +23,10 @@ public class EnemyScript : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    private float viewDistance;
+
+    //Variable for where the enemy should look
+    private Vector3 lookAt;
 
     //
     [SerializeField] private List<GameObject> PatrolPointList = new List<GameObject>();
@@ -38,6 +42,9 @@ public class EnemyScript : MonoBehaviour
 
         currentPointIndex = 0;
         currentSpeed = 3.5f;
+        viewDistance = 15f;
+
+        lookAt = PatrolPointList[currentPointIndex].transform.position;
     }
 
     // Update is called once per frame
@@ -54,7 +61,11 @@ public class EnemyScript : MonoBehaviour
         //Set the agent speed to current speed;
         agent.speed = currentSpeed;
 
-        //Rotation code
+        //Rotate to look at target
+        var direction = lookAt - transform.position;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
 
         //State machine for the AI
         switch (currentState)
@@ -65,11 +76,8 @@ public class EnemyScript : MonoBehaviour
             case State.Patrol:
                 //All behavir for the AI to do while patrolling
 
+                //Move to the current patrol point, and change to the next in the list when reached
                 agent.destination = PatrolPointList[currentPointIndex].transform.position;
-
-                Debug.Log(PatrolPointList.Count-1);
-                Debug.Log("Index: " + currentPointIndex);
-
                 if (Vector2.Distance(transform.position, PatrolPointList[currentPointIndex].transform.position) < 0.5)
                 {
                     if(currentPointIndex >= PatrolPointList.Count-1)
@@ -80,7 +88,12 @@ public class EnemyScript : MonoBehaviour
                     {
                         currentPointIndex++;
                     }
+
+                    //Make the enemy look towards next point
+                    lookAt = PatrolPointList[currentPointIndex].transform.position;
                 }
+
+                //If player spotted switch to chase
 
                 break;
             case State.ChasePlayer:
@@ -93,5 +106,18 @@ public class EnemyScript : MonoBehaviour
                 break; 
         }
 
+        
+
+    }
+
+    //Called when the enemy should check if the target is inside their vision
+    private void CheckForTarget()
+    {
+        //Check if target if inside view distance of the enemy
+        if(Vector2.Distance(transform.position, target.transform.position) <= viewDistance)
+        {
+            Vector2 directionToTarget = (target.transform.position - transform.position).normalized;
+            var direction = lookAt - transform.position;
+        }
     }
 }
