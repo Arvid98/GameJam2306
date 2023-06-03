@@ -22,8 +22,8 @@ public class EnemyScript : MonoBehaviour
     public Transform target;
 
     private float currentSpeed;
-    private float walkSpeed;
-    private float chaseSpeed;
+    private float walkSpeed = 5;
+    private float chaseSpeed = 8.5f;
 
     private NavMeshAgent agent;
 
