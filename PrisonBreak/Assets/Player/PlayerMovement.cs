@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         Movement();
     }
 
+   
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Pickable"))
@@ -49,30 +50,10 @@ public class PlayerMovement : MonoBehaviour
                 collision.gameObject.GetComponent<Door>().ToggleDoor();
                 hasKey = false;
                 //GameObject.FindWithTag("Door").GetComponent<Door>().open;
-
-
-                // collision.
             }
         }
-
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Door")
-    //    {
-    //        if (hasKey)
-    //        {
-    //            //GameObject.FindWithTag("Door").
-
-    //            collision.gameObject.GetComponent<Door>().ToggleDoor();
-
-    //            //GameObject.FindWithTag("Door").GetComponent<Door>().open;
-
-
-    //            // collision.
-    //        }
-    //    }
-    //}
+   
    
 
     public void Movement()
