@@ -19130,11 +19130,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442957629874401199, guid: 058038961f14ac84cb01859a5924ada3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.97
+      value: 73.6
       objectReference: {fileID: 0}
     - target: {fileID: 7442957629874401199, guid: 058038961f14ac84cb01859a5924ada3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.97
+      value: -86.7
       objectReference: {fileID: 0}
     - target: {fileID: 7442957629874401199, guid: 058038961f14ac84cb01859a5924ada3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -90691,6 +90691,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &997661019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997661021}
+  - component: {fileID: 997661020}
+  m_Layer: 0
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &997661020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997661019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cce2901c1fe5404091ae9badf2c4cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &997661021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997661019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 79.30678, y: -52.90107, z: -0.04206839}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1006250085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92522,5 +92566,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Winsquare
       objectReference: {fileID: 0}
+    - target: {fileID: 8458175817958712511, guid: 0cd358e4342db9741aa22cafea90612b, type: 3}
+      propertyPath: scriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 77c9d16950552a44889c5b53e19aa7c7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cd358e4342db9741aa22cafea90612b, type: 3}

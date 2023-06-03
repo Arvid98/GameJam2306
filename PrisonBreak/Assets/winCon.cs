@@ -1,27 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class winCon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    float score;
+    public float targetTime = 0f;
+    GameManger gameManager;
+    [SerializeField] ScriptableObject scriptableObject;
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gameManager = FindObjectOfType<GameManger>();
+                   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
-        {
-            SceneManager.LoadScene("Bana2");
+        {            
+            score = targetTime;
+            //gameManger.Timing();
+            if (gameManager.mapCount == 0)
+            {
+                gameManager.map1 = targetTime;
+            }
+            else if (gameManager.mapCount == 1)
+            {
+                gameManager.map2 = targetTime;
+            }
+            else if (gameManager.mapCount == 2)
+            {
+                gameManager.map3 = targetTime;
+            }
+            gameManager.mapCount++;
+            Loader.Load(Loader.Scene.Bana2);
+           
         }
+    }
+    
+
+    void Update()
+    {
+        targetTime += Time.deltaTime;
+    }
+
+    public float GetTime()
+    {
+        return targetTime;
     }
 }
