@@ -7,14 +7,17 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    
     private enum State
     {
         Patrol,
         ChasePlayer,
         AttackPlayer,
     }
+    [Header("Current Behavior (Default = Patrol)")]
     [SerializeField] private State currentState;
 
+    [Header("Target Object (Usually Player)")]
     [Tooltip("The target of the enemy. This will usually be the player object")]
     public Transform target;
 
@@ -24,16 +27,18 @@ public class EnemyScript : MonoBehaviour
 
     private NavMeshAgent agent;
 
-
+    private float chaseDistance; 
 
     //Variable for where the enemy should look
     private Vector3 lookAt;
 
     //Variables for patrol points
+    [Header("List of Patrol Points. (Fill in before starting)")]
     [SerializeField] private List<GameObject> PatrolPointList = new List<GameObject>();
     private int currentPointIndex;
 
     //Variables for FOV
+    [Header("FOV Variables")]
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform fovPrefab;
     [SerializeField] private float fov;
@@ -51,12 +56,9 @@ public class EnemyScript : MonoBehaviour
 
         currentPointIndex = 0;
         currentSpeed = 3.5f;
+        chaseDistance = 20f;
 
 
-        if(PatrolPointList.Count != 0)
-        {
-            lookAt = PatrolPointList[currentPointIndex].transform.position;
-        }
 
 
         fov = 90f;
@@ -98,8 +100,6 @@ public class EnemyScript : MonoBehaviour
             case State.Patrol:
                 //All behavir for the AI to do while patrolling
 
-                Debug.Log(PatrolPointList.Count);
-
                 //Move to the current patrol point, and change to the next in the list when reached
                 if(PatrolPointList.Count !=0)
                 {
@@ -122,13 +122,25 @@ public class EnemyScript : MonoBehaviour
 
                 }
 
-                CheckForTarget();
+                //Look at next patrol point
+                if (PatrolPointList.Count != 0)
+                {
+                    lookAt = PatrolPointList[currentPointIndex].transform.position;
+                }
 
-                //If player spotted switch to chase
+                //Constantly checks if target is visible
+                CheckForTarget();
 
                 break;
             case State.ChasePlayer:
                 //All behavior for the AI to do while chasing the player
+
+                agent.destination = target.transform.position;
+                lookAt = target.transform.position;
+
+                //Code to make it switch to attack state if necessary
+
+                CheckOutOfChaseRange();
 
                 break;
             case State.AttackPlayer:
@@ -166,14 +178,28 @@ public class EnemyScript : MonoBehaviour
                     //If the object seen is the target, then switch state, if not, then it is a wall
                     if(raycastHit2D.collider.tag == "Player")
                     {
-                        //Player spottet!
-
-                        //Change state
                         Debug.Log("SPOTTET!!!");
+
+                        //Player spottet!
+                        //Change state and execute code for when player is spottet.
+
+                        currentState = State.ChasePlayer;
+
+
                     }
                 }
             }
                 
+        }
+    }
+
+    //Called when the enemy should check if the target is too far away when chasing.
+    private void CheckOutOfChaseRange()
+    {
+        //If target is too far away. Lose interest and go back to patrolling.
+        if (Vector2.Distance(transform.position, target.transform.position) >= chaseDistance)
+        {
+            currentState = State.Patrol;
         }
     }
 }

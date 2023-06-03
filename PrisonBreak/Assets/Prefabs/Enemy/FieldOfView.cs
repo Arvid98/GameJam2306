@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// --------------------- DO NOT TOUCH THIS... I DO NOT REMEMBER HOW TO FIX IT AGAIN LOL ---------------------------
+
 public class FieldOfView : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
