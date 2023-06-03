@@ -84,9 +84,10 @@ public class EnemyScript : MonoBehaviour
         agent.speed = currentSpeed;
 
         //Rotate to look at target
+
         var direction = lookAt - transform.position;
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
         //State machine for the AI
@@ -179,7 +180,7 @@ public class EnemyScript : MonoBehaviour
                         Debug.Log("SPOTTET!!!");
 
                         //Player spottet!
-
+                        currentSpeed = chaseSpeed;
 
                         //Change state and execute code for when player is spottet.
 
@@ -199,6 +200,7 @@ public class EnemyScript : MonoBehaviour
         //If target is too far away. Lose interest and go back to patrolling.
         if (Vector2.Distance(transform.position, target.transform.position) >= chaseDistance)
         {
+            currentSpeed = walkSpeed;
             currentState = State.Patrol;
         }
     }
