@@ -7,6 +7,8 @@ TagManager:
   - Pickable
   - Door
   - Key
+  - Wall
+  - Hammer
   layers:
   - Default
   - TransparentFX

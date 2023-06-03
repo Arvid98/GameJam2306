@@ -51,7 +51,18 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                hasKey = true;
+               
+            }
+            hasKey = true;
+            pickupSound.mute = false;
+            pickupSound.Play();
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("Hammer"))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                hasHammer = true;
                 pickupSound.mute = false;
                 pickupSound.Play();
                 Destroy(collision.gameObject);
@@ -76,10 +87,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 collision.gameObject.GetComponent<BreakingWall>().BreakWall();
                 hasHammer = false;
-                if (Input.GetKey(KeyCode.E))
-                {
-
-                }
+               
             }
         }
     }
