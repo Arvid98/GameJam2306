@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed; // Tracks the current speed
     private bool isSprinting; // Tracks if the player is sprinting
 
-    [SerializeField] private bool hasKey;  // when the players pcik up one key turn true
+    [SerializeField] private bool hasKey;  // when the players pick up one key turn true
+    [SerializeField] private bool hasHammer;  // when the players pick up one key turn true
     //GameObject doorObj;
     [SerializeField] Sprite newSprite;
     [SerializeField] Sprite sFront;
@@ -42,11 +43,8 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         ChangeSprite();
     }
-    void Visuals()
-    {
-        
-    }
-   
+
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Key"))
@@ -63,12 +61,25 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hasKey)
             {
-                //GameObject.FindWithTag("Door").
-
                 collision.gameObject.GetComponent<Door>().ToggleDoor();
                 hasKey = false;
-                pickupSound.Play();
-                //GameObject.FindWithTag("Door").GetComponent<Door>().open;
+
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+
+            }
+        }
+        if (collision.CompareTag("Wall"))
+        {
+            if (hasHammer)
+            {
+                collision.gameObject.GetComponent<BreakingWall>().BreakWall();
+                hasHammer = false;
+                if (Input.GetKey(KeyCode.E))
+                {
+
+                }
             }
         }
     }
@@ -134,36 +145,5 @@ public class PlayerMovement : MonoBehaviour
             newSprite = sBack;
         }
     }
-    private void ShowFront()
-    {
-        visualGameObjectFront.SetActive(true);
-    }
-    private void HideFront()
-    {
-        visualGameObjectFront.SetActive(false);
-    }
-    private void ShowBack()
-    {
-        visualGameObjectBack.SetActive(true);
-    }
-    private void HideBack()
-    {
-        visualGameObjectBack.SetActive(false);
-    }
-    private void ShowRight()
-    {
-        visualGameObjectRight.SetActive(true);
-    }
-    private void HideRight()
-    {
-        visualGameObjectRight.SetActive(false);
-    }
-    private void ShowLeft()
-    {
-        visualGameObjectLeft.SetActive(true);
-    }
-    private void HideLeft()
-    {
-        visualGameObjectLeft.SetActive(false);
-    }
+
 }
