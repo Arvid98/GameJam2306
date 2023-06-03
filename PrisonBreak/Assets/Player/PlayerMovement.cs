@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed; // Tracks the current speed
     private bool isSprinting; // Tracks if the player is sprinting
 
+    [SerializeField] private bool hasKey;  // when the players pcik up one key turn true
+    //GameObject doorObj;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,7 +40,40 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+        if (collision.CompareTag("Door"))
+        {
+            if (hasKey)
+            {
+                //GameObject.FindWithTag("Door").
+
+                collision.gameObject.GetComponent<Door>().ToggleDoor();
+                hasKey = false;
+                //GameObject.FindWithTag("Door").GetComponent<Door>().open;
+
+
+                // collision.
+            }
+        }
+
     }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Door")
+    //    {
+    //        if (hasKey)
+    //        {
+    //            //GameObject.FindWithTag("Door").
+
+    //            collision.gameObject.GetComponent<Door>().ToggleDoor();
+
+    //            //GameObject.FindWithTag("Door").GetComponent<Door>().open;
+
+
+    //            // collision.
+    //        }
+    //    }
+    //}
+   
 
     public void Movement()
     {

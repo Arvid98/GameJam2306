@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] bool open;
+    public bool open;
     [SerializeField] private GameObject visualGameObject;
     [SerializeField]
     private void Awake()
     {
         GetComponent<Collider2D>();
+        GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
@@ -34,5 +35,9 @@ public class Door : MonoBehaviour
     private void Hide()
     {
         visualGameObject.SetActive(false);
+    }
+    public void ToggleDoor()
+    {
+        open = !open;
     }
 }
