@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinCon2 : MonoBehaviour
+public class WinCon3 : MonoBehaviour
 {
 
     float score;
@@ -21,10 +21,10 @@ public class WinCon2 : MonoBehaviour
         {
             score = targetTime;
             //gameManger.Timing();
-            gameManager.map2 = targetTime;
-            
+            gameManager.map3 = targetTime;
+
             gameManager.mapCount++;
-            Loader.Load(Loader.Scene.Bana3);
+            Loader.Load(Loader.Scene.ExitScene);
 
         }
     }

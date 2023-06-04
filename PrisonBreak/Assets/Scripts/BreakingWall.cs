@@ -16,6 +16,7 @@ public class BreakingWall : MonoBehaviour
     {
         if (breakWall)
         {
+            Destroy(gameObject);
             Hide();
             GetComponent<Collider2D>().enabled = false;
         }

@@ -8,7 +8,7 @@ public class Loader : MonoBehaviour
 {
     public enum Scene
     {
-        Loading, Menu, Intro, Bana1, Bana2, ExitScene, LosingScene
+        Loading, Menu, Intro, Bana1, Bana2, Bana3, ExitScene, LosingScene
     }
     private static Action onLoaderCallBack;
 
