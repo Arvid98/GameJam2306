@@ -18,6 +18,7 @@ public class Door : MonoBehaviour
     {
         if (open)
         {
+            Destroy(gameObject);
             Hide();
             GetComponent<Collider2D>().enabled = false;
         }
