@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/ExitScene.unity
     guid: 030b04708cf2c60428d14f3707ddabc7
+  - enabled: 1
+    path: Assets/Scenes/UI/LosingScene.unity
+    guid: 03af6690321367747a5a3135406d336a
   m_configObjects: {}
