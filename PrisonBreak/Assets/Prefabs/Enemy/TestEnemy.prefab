@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4186876876675666257}
   - component: {fileID: 4186876876675666259}
   - component: {fileID: 7720757590128069463}
+  - component: {fileID: 1868968667167189592}
   m_Layer: 0
   m_Name: TestEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +229,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &1868968667167189592
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186876876675666266}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0039743185, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5615231
 --- !u!1 &4186876877244032087
 GameObject:
   m_ObjectHideFlags: 0

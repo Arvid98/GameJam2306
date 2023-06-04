@@ -76,10 +76,13 @@ public class PlayerMovement : MonoBehaviour
                 hasKey = false;
 
             }
-            if (Input.GetKey(KeyCode.E))
-            {
+            
+        }
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("hit");
+            Loader.Load(Loader.Scene.LosingScene);
 
-            }
         }
         if (collision.CompareTag("Wall"))
         {

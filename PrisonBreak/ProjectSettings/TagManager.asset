@@ -9,6 +9,7 @@ TagManager:
   - Key
   - Wall
   - Hammer
+  - Enemy
   layers:
   - Default
   - TransparentFX
