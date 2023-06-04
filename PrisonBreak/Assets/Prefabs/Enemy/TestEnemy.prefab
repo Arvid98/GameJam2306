@@ -129,7 +129,7 @@ MonoBehaviour:
   PatrolPointList: []
   layerMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 448
   fovPrefab: {fileID: 5775167233331644988, guid: 701291643719d4340a4bba6ef4a050d7, type: 3}
   fov: 90
   viewDistance: 10
