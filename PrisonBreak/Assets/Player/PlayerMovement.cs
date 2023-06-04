@@ -100,14 +100,14 @@ public class PlayerMovement : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         // Check if only one axis is being used (horizontal or vertical)
-        if (moveHorizontal != 0 && moveVertical != 0)
-        {
-            // If diagonal movement is detected, zero out the corresponding axis
-            if (Mathf.Abs(moveHorizontal) > Mathf.Abs(moveVertical))
-                moveVertical = 0;
-            else
-                moveHorizontal = 0;
-        }
+        //if (moveHorizontal != 0 && moveVertical != 0)
+        //{
+        //    // If diagonal movement is detected, zero out the corresponding axis
+        //    if (Mathf.Abs(moveHorizontal) > Mathf.Abs(moveVertical))
+        //        moveVertical = 0;
+        //    else
+        //        moveHorizontal = 0;
+        //}
 
         rb.velocity = new Vector2(moveHorizontal * currentSpeed, moveVertical * currentSpeed);
 

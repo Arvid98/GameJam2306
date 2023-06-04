@@ -7,7 +7,7 @@ public class MenuUI : MonoBehaviour
     public void ChangeScene()
     {
         Debug.Log("Clicked Play game");
-        Loader.Load(Loader.Scene.Bana1);
+        Loader.Load(Loader.Scene.Intro);
     }
    
 
